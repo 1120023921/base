@@ -62,8 +62,8 @@ public class SystemController {
     @Autowired
     private TSUserRoleService userRoleService;
 
-    @ApiOperation(value = "无权限", notes = "无权限", httpMethod = "GET")
-    @RequestMapping(value = "/403",method = RequestMethod.GET)
+    @ApiOperation(value = "无权限", notes = "无权限", httpMethod = "POST")
+    @RequestMapping(value = "/403", method = RequestMethod.POST)
     public R error403() {
         ErrorCode errorCode = new ErrorCode();
         errorCode.setCode(ErrorCode.FORBIDDEN);
@@ -71,8 +71,8 @@ public class SystemController {
         return R.restResult(null, errorCode);
     }
 
-    @ApiOperation(value = "未登陆", notes = "未登陆", httpMethod = "GET")
-    @RequestMapping(value = "/401",method = RequestMethod.GET)
+    @ApiOperation(value = "未登陆", notes = "未登陆", httpMethod = "POST")
+    @RequestMapping(value = "/401", method = RequestMethod.POST)
     public R error401() {
         ErrorCode errorCode = new ErrorCode();
         errorCode.setCode(ErrorCode.UNAUTHORIZED);

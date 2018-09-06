@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,7 +47,7 @@ public class BaseController<T> extends ApiController {
         ErrorCode<T> errorCode = new ErrorCode<>();
         try {
             Field id = entity.getClass().getDeclaredField("id");
-            if (null != id && "class java.lang.String".equals(id.getGenericType().toString())) {
+            if (null != id && StringUtils.isEmpty(id.get(entity)) && "class java.lang.String".equals(id.getGenericType().toString())) {
                 Method setId = entity.getClass().getMethod("setId", String.class);
                 setId.invoke(entity, UUID.randomUUID().toString());
             }
